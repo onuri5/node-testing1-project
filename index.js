@@ -51,15 +51,14 @@ function findLargestInteger(integers) {
   return largestNum;
 }
 
-
-
 class Counter {
   /**
    * [Exercise 4A] Counter creates a counter
    * @param {number} initialNumber - the initial state of the count
    */
   constructor(initialNumber) {
-    // ✨ initialize whatever properties are needed
+    this.counter = initialNumber;
+    this.startCount = initialNumber;
   }
 
   /**
@@ -76,6 +75,15 @@ class Counter {
    */
   countDown() {
     // ✨ implement
+    if (this.startCount === 3) {
+      this.startCount -= 1;
+      return this.counter;
+    } else if (this.counter > 0) {
+      this.counter -= 1;
+      return this.counter;
+    } else {
+      return this.counter;
+    }
   }
 }
 
@@ -84,7 +92,8 @@ class Seasons {
    * [Exercise 5A] Seasons creates a seasons object
    */
   constructor() {
-    // ✨ initialize whatever properties are needed
+    this.seasons = ["summer", "fall", "winter", "spring"];
+    this.currentSeason = "summer";
   }
 
   /**
@@ -99,8 +108,28 @@ class Seasons {
    * seasons.next() // returns "spring"
    * seasons.next() // returns "summer"
    */
-  next() {
-    // ✨ implement
+  next(rotations) {
+    let arrIncr = 0;
+    if (rotations) {
+      for (let i = 1; i <= rotations; i++) {
+        this.currentSeason = this.seasons[arrIncr];
+        console.log(i, this.currentSeason);
+        if (arrIncr < this.seasons.length - 1) {
+          arrIncr += 1;
+        } else {
+          arrIncr = 0;
+        }
+      }
+      return this.currentSeason;
+    } else {
+      const season = this.seasons[arrIncr];
+      if (arrIncr < this.seasons.length - 1) {
+        arrIncr += 1;
+      } else {
+        arrIncr = 0;
+      }
+      return season;
+    }
   }
 }
 
