@@ -68,22 +68,22 @@ describe("[Exercise 5] Seasons", () => {
   });
   test('[9] the FIRST call of seasons.next returns "summer"', () => {
     expect(seasons.next()).toBe("summer");
-  })
+  });
   test('[10] the SECOND call of seasons.next returns "fall"', () => {
     expect(seasons.next(2)).toBe("fall");
-  })
+  });
   test('[11] the THIRD call of seasons.next returns "winter"', () => {
     expect(seasons.next(3)).toBe("winter");
-  })
+  });
   test('[12] the FOURTH call of seasons.next returns "spring"', () => {
     expect(seasons.next(4)).toBe("spring");
-  })
+  });
   test('[13] the FIFTH call of seasons.next returns again "summer"', () => {
     expect(seasons.next(5)).toBe("summer");
-  })
+  });
   test('[14] the 40th call of seasons.next returns "spring"', () => {
     expect(seasons.next(40)).toBe("spring");
-  })
+  });
 });
 
 describe("[Exercise 6] Car", () => {
@@ -91,13 +91,43 @@ describe("[Exercise 6] Car", () => {
   beforeEach(() => {
     focus = new utils.Car("focus", 20, 30); // each test must start with a fresh car
   });
-  // test('[15] driving the car returns the updated odometer', () => {})
-  // test('[16] driving the car uses gas', () => {})
-  // test('[17] refueling allows to keep driving', () => {})
-  // test('[18] adding fuel to a full tank has no effect', () => {})
+  test("[15] driving the car returns the updated odometer", () => {
+    expect(focus.drive(600)).toMatchObject({ odometer: 600, distance: 600 });
+  });
+  test("[16] driving the car uses gas", () => {
+    expect(focus.drive(600)).toMatchObject({
+      odometer: 600,
+      distance: 600,
+      tank: 0,
+    });
+  });
+  test("[17] refueling allows to keep driving", () => {
+    focus.drive(600);
+    focus.refuel(20);
+    expect(focus.drive(600)).toMatchObject({
+      odometer: 600,
+      distance: 600,
+      tank: 0,
+    });
+  });
+  test("[18] adding fuel to a full tank has no effect", () => {
+    focus.drive(600);
+    focus.refuel(270);
+    expect(focus.drive(600)).toMatchObject({
+      odometer: 600,
+      distance: 600,
+      tank: 0,
+    });
+  });
 });
 
 describe("[Exercise 7] isEvenNumberAsync", () => {
-  // test('[19] resolves true if passed an even number', () => {})
-  // test('[20] resolves false if passed an odd number', () => {})
+  test('[19] resolves true if passed an even number', async () => {
+    let result = await utils.isEvenNumberAsync(6);
+    expect(result).toBeTruthy();
+  })
+  test('[20] resolves false if passed an odd number', async () => {
+    let result = await utils.isEvenNumberAsync(7);
+    expect(result).toBeFalsy();
+  })
 });
